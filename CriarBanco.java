@@ -27,7 +27,7 @@ public class CriarBanco {
                     """);
                 stmt.execute("""
                         CREATE TABLE IF NOT EXISTS Reserva (
-                            id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+                            codigo VARCHAR(3) PRIMARY KEY NOT NULL,
                             hotel_nome VARCHAR(255) NOT NULL,
                             Quarto_Num VARCHAR(10) NOT NULL,
                             FOREIGN KEY (hotel_nome) REFERENCES Hotel(nome) ON DELETE CASCADE,
