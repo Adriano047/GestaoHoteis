@@ -104,16 +104,16 @@ public class Quarto{
         else {
             JOptionPane.showMessageDialog(null, "AVISO: Apenas quartos Não reservados poderão ser Removidos", "Apenas Disponiveis", 2);
             PegarIndice = JOptionPane.showInputDialog(null," ".repeat(30) + "Quartos\n" + "-".repeat(60) + "\n" + NomesQuartos + "Informe a id do quarto", "Quartos", 1);
+            if (PegarIndice != null) {
+                var Format = PegarIndice.trim();
+                var DeletarQuarto = "Delete from Quarto where Id = ?";
+                PreparedStatement Deletar = conexao.prepareStatement(DeletarQuarto);
+                Deletar.setString(1, Format);
+                Integer LinhasDeletadas = Deletar.executeUpdate();
+                if (LinhasDeletadas.equals(1)) JOptionPane.showMessageDialog(null, "Quarto Deletado Com Sucesso");
+                else  JOptionPane.showMessageDialog(null, "Erro: Valor Invalido", "Quarto Inexistente", 1);
+            } 
         }
-        if (PegarIndice != null) {
-            var Format = PegarIndice.trim();
-            var DeletarQuarto = "Delete from Quarto where Id = ?";
-            PreparedStatement Deletar = conexao.prepareStatement(DeletarQuarto);
-            Deletar.setString(1, Format);
-            Integer LinhasDeletadas = Deletar.executeUpdate();
-            if (LinhasDeletadas.equals(1)) JOptionPane.showMessageDialog(null, "Quarto Deletado Com Sucesso");
-            else  JOptionPane.showMessageDialog(null, "Erro: Valor Invalido", "Quarto Inexistente", 1);
-        } 
     }
     void Listar () throws SQLException {
         String ListarQuartos = "SELECT * FROM Quarto";
