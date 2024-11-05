@@ -2,6 +2,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Random;
 
 import javax.swing.JOptionPane;
 
@@ -77,10 +78,38 @@ public class Reserva  {
                 ResultSet result = Consultar.executeQuery();
 
                 if (result.next()) PegarHotel = result.getString("nome");
-                String sql = "INSERT INTO Reserva (hotel_nome, Quarto_Num) VALUES (?, ?)";
+                Random random = new Random();
+                String codReserva;
+                while (true) {
+                    codReserva = "";
+                    var cont = 0;
+                    while (cont < 3) {
+                        int randomNum = random.nextInt(122 - 48 + 1) + 48; 
+                        var pegarChar = (char) randomNum;
+                        if ((pegarChar >= '0' && pegarChar <= '9') ||
+                            (pegarChar >= 'A' && pegarChar <= 'Z')
+                        ) {
+                            codReserva += pegarChar;
+
+                            cont += 1;
+                        }
+                    }  
+                    String pegarCods = "SELECT codigo FROM Reserva";
+                    PreparedStatement Conectar = conexao.prepareStatement(pegarCods);
+                    ResultSet executar = Conectar.executeQuery();
+                    var Repetido = false;
+                    while (resultado.next()) {
+                        String codigoDoBanco = executar.getString("codigo");
+                        if (codigoDoBanco.equals(codReserva)) Repetido = true;
+                    }
+                    if (Repetido == false) break;
+                }
+                
+                String sql = "INSERT INTO Reserva (Codigo, hotel_nome, Quarto_Num) VALUES (?, ?, ?)";
                 PreparedStatement stmt = conexao.prepareStatement(sql);
-                stmt.setString(1, PegarHotel);
-                stmt.setString(2, formatarNumero);
+                stmt.setString(1, codReserva);
+                stmt.setString(2, PegarHotel);
+                stmt.setString(3, formatarNumero);
                 stmt.execute(); 
                 
                 String Update = "UPDATE Quarto SET Reservado = ? WHERE Numero = ? AND hotel_nome = ?";
@@ -95,7 +124,7 @@ public class Reserva  {
             break; 
         }
         }catch (Exception e) {
-           
+           System.out.println(e.getMessage());
         }
     }
     }
@@ -105,19 +134,19 @@ public class Reserva  {
         ResultSet resultado = Exec.executeQuery();
         StringBuilder NomeReservas = new StringBuilder();
         while (resultado.next()) {
-            String reservaId = resultado.getString("id");
+            String reservaCod = resultado.getString("codigo");
 
             String HotelNome = resultado.getString("hotel_nome");
             String QuartoNumero = resultado.getString("Quarto_Num");
-            NomeReservas.append(reservaId + " - ").append("Hotel: " + HotelNome).append(" (Nº" + QuartoNumero + ")\n\n");
+            NomeReservas.append(reservaCod + " - ").append("Hotel: " + HotelNome).append(" (Nº" + QuartoNumero + ")\n\n");
         } 
         if (NomeReservas.isEmpty()) JOptionPane.showMessageDialog(null, "Sem Reservas Registradas", "Reservas", 1);
        
         else {
-            var EscolherValor = JOptionPane.showInputDialog(null," ".repeat(10) + "Reservas\n" + "-".repeat(30) + "\n" + NomeReservas + "Informe o Indice Para remoção:", "reservas", 1);
+            var EscolherValor = JOptionPane.showInputDialog(null," ".repeat(10) + "Reservas\n" + "-".repeat(30) + "\n" + NomeReservas + "Informe o Codigo Para remoção:", "reservas", 1);
             if (EscolherValor != null) {
                 var Format = EscolherValor.trim();
-                String ValorDeletado = "select * from reserva where id = ?";
+                String ValorDeletado = "select * from reserva where codigo = ?";
                 PreparedStatement Executar = conexao.prepareStatement(ValorDeletado);
                 Executar.setString(1, Format);
                 ResultSet result = Executar.executeQuery();
@@ -134,7 +163,7 @@ public class Reserva  {
                 Up.setString(3, NomeHotel);
                 Up.execute(); 
 
-                String Delete = "delete from reserva where id = ?";
+                String Delete = "delete from reserva where codigo = ?";
                 PreparedStatement Deletar = conexao.prepareStatement(Delete);
                 Deletar.setString(1, Format);
                 Integer LinhasDeletadas = Deletar.executeUpdate();
