@@ -57,7 +57,21 @@ Este sistema utiliza uma implementação de banco de dados para gerenciar eficie
 ### Rodando Codigo:
 https://github.com/user-attachments/assets/33bb18b9-61d3-4410-b578-daf3254c73c1
 
+## Mudança de Conexão Importante ⚠️:
 
+```bash
+9 private static final String url = "jdbc:mysql://localhost?verifyServerCertificate=false&useSSL=true";
+10 private static final String usuario = "root";
+11 private static final String senha = "root";
+
+```
+### Caso você não deseje criar uma conexão com o banco de dados na porta 3306 com o usuario e senha root vai aqui alguns avisos: 
+**Linha 9:** A variável url se conecta ao banco de dados MySQL na porta padrão 3306. Se você precisar usar outra porta, deve incluir isso na URL. EX: jdbc:mysql://localhost:3307.
+
+**Linha 10:** A variável usuario define o nome do usuário que está se conectando ao banco de dados. O padrão é root, mas você pode mudá-lo para outro usuário com permissões  
+adequadas.
+
+**Linha 11:** A variável senha especifica a senha do usuário definido na linha 10. Assim como o usuário, você deve alterar para a senha correta conforme configurada no seu banco de dados.
 
 ## :octocat: Faça o clone do projeto
 
@@ -69,6 +83,8 @@ $ gh repo clone Adriano047/GestaoHoteis
 $ cd me
 
 ```
+
+
 ## 👨‍🔧 Sobre mim
 "Conecte-se comigo no LinkedIn para explorar minha trajetória profissional e colaborar em projetos incríveis."
 <table>
