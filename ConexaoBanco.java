@@ -4,6 +4,8 @@ import java.sql.SQLException;
 
 public class ConexaoBanco { 
     private static Connection conexao = null;
+    // A variável url se conecta com a porta padrão 3306 caso que usar outra porta mude o valor;
+    // o valor das variáveis usuario e senha irá de acordo com o que foi definido por você;
     private static final String url = "jdbc:mysql://localhost?verifyServerCertificate=false&useSSL=true";
     private static final String usuario = "root";
     private static final String senha = "root";
