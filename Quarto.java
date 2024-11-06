@@ -2,6 +2,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Random;
 
 import javax.swing.JOptionPane;
 
@@ -65,11 +66,37 @@ public class Quarto{
                 ResultSet Valor = Consultar.executeQuery();
 
                 if (Valor.next()) PegarNome = Valor.getString("nome");
+                Random random = new Random();
+                String codQuarto;
+                while (true) {
+                    codQuarto = "";
+                    var cont = 0;
+                    while (cont < 3) {
+                        int randomNum = random.nextInt(122 - 48 + 1) + 48; 
+                        var pegarChar = (char) randomNum;
+                        if ((pegarChar >= '0' && pegarChar <= '9') ||
+                            (pegarChar >= 'A' && pegarChar <= 'Z')
+                        ) {
+                            codQuarto += pegarChar;
 
-                String sql = "INSERT INTO Quarto (Numero, hotel_nome) VALUES (?, ?)";
+                            cont += 1;
+                        }
+                    }  
+                    String pegarCods = "SELECT codigo FROM Quarto";
+                    PreparedStatement Conectar = conexao.prepareStatement(pegarCods);
+                    ResultSet executar = Conectar.executeQuery();
+                    var Repetido = false;
+                    while (resultado.next()) {
+                        String codigoDoBanco = executar.getString("codigo");
+                        if (codigoDoBanco.equals(codQuarto)) Repetido = true;
+                    }
+                    if (Repetido == false) break;
+                }
+                String sql = "INSERT INTO Quarto (Codigo, Numero, hotel_nome) VALUES (?, ?, ?)";
                 PreparedStatement stmt = conexao.prepareStatement(sql);
-                stmt.setString(1, formatarNumero);
-                stmt.setString(2, PegarNome);
+                stmt.setString(1, codQuarto);
+                stmt.setString(2, formatarNumero);
+                stmt.setString(3, PegarNome);
                 stmt.execute(); 
                 break;  
                 }catch (Exception e) {
@@ -92,11 +119,11 @@ public class Quarto{
         ResultSet resultado = Listar.executeQuery();
         StringBuilder NomesQuartos = new StringBuilder();
         while (resultado.next()) {
-            String IdQuarto = resultado.getString("id");
+            String codigoQuarto = resultado.getString("codigo");
 
             String nomeQuarto = resultado.getString("Numero");
             String nomeHotel = resultado.getString("hotel_nome");
-            NomesQuartos.append(IdQuarto + " - ").append("Quarto: (Nº" + nomeQuarto + ")").append(" Hotel: ").append(nomeHotel).append("\n\n");
+            NomesQuartos.append(codigoQuarto + " - ").append("Quarto: (Nº" + nomeQuarto + ")").append(" Hotel: ").append(nomeHotel).append("\n\n");
             
         }
         var PegarIndice = "";
@@ -104,10 +131,10 @@ public class Quarto{
         
         else {
             JOptionPane.showMessageDialog(null, "AVISO: Apenas quartos Não reservados poderão ser Removidos", "Apenas Disponiveis", 2);
-            PegarIndice = JOptionPane.showInputDialog(null," ".repeat(30) + "Quartos\n" + "-".repeat(60) + "\n" + NomesQuartos + "Informe a id do quarto", "Quartos", 1);
+            PegarIndice = JOptionPane.showInputDialog(null," ".repeat(30) + "Quartos\n" + "-".repeat(60) + "\n" + NomesQuartos + "Informe o codigo do quarto", "Quartos", 1);
             if (PegarIndice != null) {
                 var Format = PegarIndice.trim();
-                var DeletarQuarto = "Delete from Quarto where Id = ?";
+                var DeletarQuarto = "Delete from Quarto where codigo = ?";
                 PreparedStatement Deletar = conexao.prepareStatement(DeletarQuarto);
                 Deletar.setString(1, Format);
                 Integer LinhasDeletadas = Deletar.executeUpdate();
