@@ -8,8 +8,9 @@ Este sistema utiliza uma implementação de banco de dados para gerenciar eficie
  - **Listar:** Exibe os Nomes dos hotéis, os quartos disponíveis e reservados, além das reservas ativas, facilitando a visualização e a gestão das informações.
 
 ## Validações de dados ✅:
+- **Geral:** Garante que os inputs não sejam enviados vazios e realiza uma limpeza nos espaços anteriores e posteriores com o método .trim()
 - **Registrar Hotel** O sistema notifica o usuário caso ele tente adicionar um hotel com um nome já cadastrado no banco de dados.
-- **Remover Hotel:** A interface de remoção só será exibida se existir pelo menos um hotel. Se houver uma tentativa de exclusão, o usuário será notificado de que todas as reservas e quartos associados a esse hotel serão   
+- **Remover Hotel:** A interface de remoção só será exibida se existir pelo menos um hotel. Se houver uma tentativa de exclusão, o usuário será notificado de que todas as reservas e quartos associados a esse hotel serão  
     removidos.
 - **Registrar Quarto:**  É possível adicionar quartos apenas se existir pelo menos um hotel. Quartos com o mesmo nome podem ser adicionados, mas devem pertencer a hotéis diferentes.
 - **Remover Quarto:** A remoção de quartos só será permitida se não houver reservas associadas a eles, ou seja, apenas os quartos com status DISPONÍVEL podem ser removidos.
@@ -25,46 +26,69 @@ Este sistema utiliza uma implementação de banco de dados para gerenciar eficie
 ### Tabela: Quartos
 | Colunas  |  Tipos De Dados  |  Descrição             |
 |----------| ---------------- |------------------------|
-| **id**         |       INT        | Chave Primária, possui auto incremento  |
-| **numero**     |  VARCHAR(10)   |  Numero do quarto, chave única                      | 
+| **codigo**     |   VARCHAR(3)          | Chave Primária,Possui logica para gerar codigo alfaNumerico de três digitos aleatorios  |
+| **numero**     |  VARCHAR(5)   |  Numero do quarto, chave única                      | 
 | **Reservado**  |  ENUM('DISPONIVEL', 'RESERVADO') DEFAULT 'DISPONIVEL'        | Status do quarto, que pode ser 'DISPONIVEL' ou 'RESERVADO'            |
 | **hotel_nome** |  VARCHAR(255)   |   Chave Estrangeira e única, Delete Cascade                    |
 
 ### Tabela: Reservas
 | Colunas  |  Tipos De Dados  |  Descrição             |
 |----------| ---------------- |------------------------|
-| **codigo**     |  VARCHAR(3)      |  Chave Primária,Possui logica para gerar codigo alfaNumerico de três digitos aleatoria |
+| **codigo**     |  VARCHAR(3)      |  Chave Primária,Possui logica para gerar codigo alfaNumerico de três digitos aleatorios |
 | **hotel_nome** |  VARCHAR(255)    |  Chave Estrangeira e única, Delete Cascade                      |
-| **quarto_Num** |  VARCHAR(10)     |  Chave Estrangeira e única, Delete Cascade                      |
+| **quarto_Num** |  VARCHAR(5)     |  Chave Estrangeira e única, Delete Cascade                      |
 
-## 💻 Telas 
-### Adicionar:
-![Add](https://github.com/user-attachments/assets/7e7179ff-618f-4690-a5b9-cce4deb17398)
+## 💻 Telas
+### Menus:
+   #### Menu Principal:
+   ![Menu](https://github.com/user-attachments/assets/6ada155f-47d2-49ad-b41d-6160db3496f3)
+   #### Menu Hotel:
+   ![MenuHotel](https://github.com/user-attachments/assets/ab2df1ec-207c-442e-b445-6c05d3fc288a)
+   
+   **Obs:** Os menus de Quarto e Reserva são iguais a esse.
+### Hotel 🚪:
+   #### Adicionando: 
+   ![addHotel](https://github.com/user-attachments/assets/f7ec812b-788c-46c1-9ade-1f2a6c6db468)
+   #### Removendo:
+   ![RemoveHotel](https://github.com/user-attachments/assets/6f3a21ac-7d39-4b78-94e0-29c3254a3351)
+   #### Listando:
+   ![ListHotel](https://github.com/user-attachments/assets/8f6bd535-ba24-4908-8e7e-1c5d88704155)
 
-### Filtro Dia da Semana:
-![DiaSemana](https://github.com/user-attachments/assets/96168368-9150-4f59-9d09-fc0af5e3593c)
+### Quarto 🔑:
+   #### Adicionando:
+   **Informando numero do quarto.**
+   
+   ![addQuarto](https://github.com/user-attachments/assets/e3f86908-2dd9-4218-976e-8a7097488c56)
+   
+   **Selecionando o Hotel que deseja atribuir aquele quarto.**
+   
+   ![addQuarto2](https://github.com/user-attachments/assets/7c1b3799-ef72-4ed3-aa66-6ab0d834a534)
+   #### Removendo: 
+   ![removeQuarto](https://github.com/user-attachments/assets/9257c9e4-514e-4c8f-a9c2-09b919f6a646)
+   #### Listando:
+   ![ListaQuarto](https://github.com/user-attachments/assets/cb23cccb-5232-4045-a800-5a294c01a705)
 
 
-### Filtro de Turno:
-![TurnoFoto](https://github.com/user-attachments/assets/b97a26dc-4ba6-4cd0-9fda-ff8f1d0926ee)
+### 🛎️ Reserva:
+   #### Adicionando: 
+   **Selecionando o Hotel**
+   
+   ![AddReserva](https://github.com/user-attachments/assets/652738f3-1b19-438c-9d78-79bf50650c72)
 
-### Adicionando Alimentos:
-![PratoPricipal](https://github.com/user-attachments/assets/9068c204-f885-46f4-9cc8-89bb484af716)
-
-### Troca de Valores: 
-![Troca](https://github.com/user-attachments/assets/ba29632d-10ab-41e9-a331-395e5b04769a)
+   **Selecionando o Quarto.**
+   
+   ![AddReserva2](https://github.com/user-attachments/assets/a9d45ed2-7123-4dc6-aeb1-a50d4b5d962e)
+   #### Removendo:
+   ![RemoverReserva](https://github.com/user-attachments/assets/6833e18d-b53a-486d-9895-5af4baf332b2)
+   #### Listando:
+   ![ListarReservas](https://github.com/user-attachments/assets/7ba70ce1-587b-4538-bf1c-a6dfbd4e7b5e)
 
 ### Rodando Codigo:
 https://github.com/user-attachments/assets/33bb18b9-61d3-4410-b578-daf3254c73c1
 
 ## Mudança de Conexão Importante ⚠️:
+![Conexao](https://github.com/user-attachments/assets/2e1d5aa5-9b43-44d3-a639-d6ddcef9e3a3)
 
-```bash
-9 private static final String url = "jdbc:mysql://localhost?verifyServerCertificate=false&useSSL=true";
-10 private static final String usuario = "root";
-11 private static final String senha = "root";
-
-```
 ### Caso você não deseje criar uma conexão com o banco de dados na porta 3306 com o usuario e senha root vai aqui alguns avisos: 
 **Linha 9:** A variável url se conecta ao banco de dados MySQL na porta padrão 3306. Se você precisar usar outra porta, deve incluir isso na URL. EX: jdbc:mysql://localhost:3307.
 
