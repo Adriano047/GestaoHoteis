@@ -48,7 +48,7 @@ Este sistema utiliza uma implementação de banco de dados para gerenciar eficie
    **Obs:** Os menus de Quarto e Reserva são iguais a esse.
 ### Hotel 🚪:
    #### Adicionando: 
-   ![addHotel](https://github.com/user-attachments/assets/f7ec812b-788c-46c1-9ade-1f2a6c6db468)
+   ![AddHotel](https://github.com/user-attachments/assets/3f35f3af-dec8-40e7-b473-494018f0d005)
    #### Removendo:
    ![RemoveHotel](https://github.com/user-attachments/assets/6f3a21ac-7d39-4b78-94e0-29c3254a3351)
    #### Listando:
@@ -58,13 +58,13 @@ Este sistema utiliza uma implementação de banco de dados para gerenciar eficie
    #### Adicionando:
    **Informando numero do quarto.**
    
-   ![addQuarto](https://github.com/user-attachments/assets/e3f86908-2dd9-4218-976e-8a7097488c56)
+   ![addQuarto](https://github.com/user-attachments/assets/d3b16b6b-7e71-459a-a731-bcf416dd73aa)
    
    **Selecionando o Hotel que deseja atribuir aquele quarto.**
    
-   ![addQuarto2](https://github.com/user-attachments/assets/7c1b3799-ef72-4ed3-aa66-6ab0d834a534)
+   ![addQuarto2](https://github.com/user-attachments/assets/1e0048fb-4544-4122-9b10-abef8665cdf4)
    #### Removendo: 
-   ![removeQuarto](https://github.com/user-attachments/assets/9257c9e4-514e-4c8f-a9c2-09b919f6a646)
+   ![RemoveQuarto](https://github.com/user-attachments/assets/82367a00-2871-4c74-9399-a302a1b37dbd)
    #### Listando:
    ![ListaQuarto](https://github.com/user-attachments/assets/cb23cccb-5232-4045-a800-5a294c01a705)
 
@@ -73,11 +73,11 @@ Este sistema utiliza uma implementação de banco de dados para gerenciar eficie
    #### Adicionando: 
    **Selecionando o Hotel**
    
-   ![AddReserva](https://github.com/user-attachments/assets/652738f3-1b19-438c-9d78-79bf50650c72)
+   ![addReserva](https://github.com/user-attachments/assets/49df026d-3d72-48fa-863a-f3b722cee14b)
 
    **Selecionando o Quarto.**
    
-   ![AddReserva2](https://github.com/user-attachments/assets/a9d45ed2-7123-4dc6-aeb1-a50d4b5d962e)
+   ![addReserva2](https://github.com/user-attachments/assets/8ebffd6f-0780-4916-a9a1-edf24dd06e70)
    #### Removendo:
    ![RemoverReserva](https://github.com/user-attachments/assets/6833e18d-b53a-486d-9895-5af4baf332b2)
    #### Listando:
@@ -87,7 +87,7 @@ Este sistema utiliza uma implementação de banco de dados para gerenciar eficie
 https://github.com/user-attachments/assets/33bb18b9-61d3-4410-b578-daf3254c73c1
 
 ## Mudança de Conexão Importante ⚠️:
-![Conexao](https://github.com/user-attachments/assets/2e1d5aa5-9b43-44d3-a639-d6ddcef9e3a3)
+![Conexão](https://github.com/user-attachments/assets/a363d006-5b52-4269-9357-1258e12620ea)
 
 ### Caso você não deseje criar uma conexão com o banco de dados na porta 3306 com o usuario e senha root vai aqui alguns avisos: 
 **Linha 9:** A variável url se conecta ao banco de dados MySQL na porta padrão 3306. Se você precisar usar outra porta, deve incluir isso na URL. EX: jdbc:mysql://localhost:3307.
@@ -120,8 +120,3 @@ $ cd me
 </table>
 
 <p align="right">(<a href="#readme-top">Voltar ao topo</a>)</p>
-
-
-
-
-
