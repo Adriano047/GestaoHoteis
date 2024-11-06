@@ -13,7 +13,7 @@ public class Hotel  {
         while(true) {
            try {
             
-            var InformarNome = JOptionPane.showInputDialog("Informe O nome Do Hotel: ");
+            var InformarNome = JOptionPane.showInputDialog(null, "Informe O nome Do Hotel: ", "Registrar novo hotel",3);
             if (InformarNome == null) {
                 break;
             }
