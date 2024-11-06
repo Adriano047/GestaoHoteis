@@ -30,7 +30,7 @@ public class Quarto{
                 var formatarNumero = "";
                 var formatarIndice = "";
                 while(true) {
-                    var receberNumero = JOptionPane.showInputDialog("Informe o Numero do Quarto: ");
+                    var receberNumero = JOptionPane.showInputDialog(null, "Informe o Numero do Quarto: ", "Registrar novo Quarto",3);
                     if (receberNumero == null) {
                         continuar = false;
                         break;
@@ -45,7 +45,8 @@ public class Quarto{
                 if (!continuar) break; 
                 
                 while(true) {
-                    var receberIndice = JOptionPane.showInputDialog("Hoteis: \n"+ NomesHoteis + "Informe o indice do Hotel: ");
+                    var receberIndice = JOptionPane.showInputDialog(null, "Hoteis: \n"+ NomesHoteis + "Informe o indice do Hotel: ", "Selecionar Hotel",3);
+
                     if (receberIndice == null) {
                             continuar = false;
                             break;
