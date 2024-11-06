@@ -31,7 +31,7 @@ public class Reserva  {
             var formatarHotel = "";
             var formatarNumero = "";
             while(formatarHotel.equals("")) {
-                var receberHotel = JOptionPane.showInputDialog("Hoteis: \n"+ NomesHoteis + "Informe o indice do Hotel: ");
+                var receberHotel = JOptionPane.showInputDialog(null, "Hoteis: \n"+ NomesHoteis + "Informe o indice do Hotel: ", "Selecionar Hotel", 3);
                 if (receberHotel == null) {
                     continuar = false;
                     break;
@@ -60,7 +60,7 @@ public class Reserva  {
                 JOptionPane.showMessageDialog(null, "Este hotel não possui quarto disponiveis", "Não Há Vagas", 1);
             } else {
                 while(formatarNumero.equals("")) {
-                var receberNumero = JOptionPane.showInputDialog("Quartos: \n" + QuartoNumeros + "Informe o numero do quarto: ");
+                var receberNumero = JOptionPane.showInputDialog(null, "Quartos: \n" + QuartoNumeros + "Informe o numero do quarto: ", "Selecionar Quarto", 3);
                 if (receberNumero == null) {
                     continuar = false;
                     break;
