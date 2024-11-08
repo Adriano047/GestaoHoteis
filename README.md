@@ -12,7 +12,7 @@ Este sistema utiliza uma implementação de banco de dados para gerenciar eficie
 - **Registrar Hotel** O sistema notifica o usuário caso ele tente adicionar um hotel com um nome já cadastrado no banco de dados.
 - **Remover Hotel:** A interface de remoção só será exibida se existir pelo menos um hotel. Se houver uma tentativa de exclusão, o usuário será notificado de que todas as reservas e quartos associados a esse hotel serão  
     removidos.
-- **Registrar Quarto:**  É possível adicionar quartos apenas se existir pelo menos um hotel. Quartos com o mesmo nome podem ser adicionados, mas devem pertencer a hotéis diferentes.
+- **Registrar Quarto:**  É possível adicionar quartos apenas se existir pelo menos um hotel. Quartos com o mesmo nome podem ser adicionados, mas devem pertencer a hotéis diferentes. Os nomes dos quartos podem conter apenas números, letras maiúsculas, hífen ('-') e barra ('/'); outros caracteres não são permitidos.
 - **Remover Quarto:** A remoção de quartos só será permitida se não houver reservas associadas a eles, ou seja, apenas os quartos com status DISPONÍVEL podem ser removidos.
 - **Registrar Reserva:** Garante que haja apenas uma reserva por quarto e a interface exibirá apenas os quartos disponíveis.
 
