@@ -37,10 +37,22 @@ public class Quarto{
                         break;
                     }
                     formatarNumero = receberNumero.trim().replaceAll("\\s+", " ");
+                    var caractereInvalido = false;
+                    for (var i = 0 ; i < formatarNumero.length(); i++) {
+                        var Char = formatarNumero.charAt(i);
+                        if ((Char >= '0' && Char <= '9') || (Char >= 'A' && Char <= 'Z') || Char == '-' || Char == '/')  {
+
+                        }else {
+                            caractereInvalido = true;
+                            break;
+                        }
+                    }
                     if (formatarNumero.equals("")) JOptionPane.showMessageDialog(null, "Erro: É necessario Digitar algo, Por favor tente novamente", "Valor Vazio", 0);
     
                     else if(formatarNumero.contains(" ")) JOptionPane.showMessageDialog(null, "Erro: Não suporta espaços entre palavras, Por favor tente novamente", "Espaço Adicionado", 0);
-                     
+                    
+                    else if(caractereInvalido == true) JOptionPane.showMessageDialog(null, "Erro: Apenas números, letras maiúsculas, hífen ('-') e barra ('/') são caracteres suportados.", "Espaço Adicionado", 0);
+                    
                     else break;
                 }
                 if (!continuar) break; 
