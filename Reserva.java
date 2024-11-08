@@ -29,7 +29,7 @@ public class Reserva  {
         while (continuar) {
         try {
             var formatarHotel = "";
-            var formatarNumero = "";
+            var pegarCodigo = "";
             while(formatarHotel.equals("")) {
                 var receberHotel = JOptionPane.showInputDialog(null, "Hoteis: \n"+ NomesHoteis + "Informe o indice do Hotel: ", "Selecionar Hotel", 3);
                 if (receberHotel == null) {
@@ -52,24 +52,26 @@ public class Reserva  {
             ResultSet exe = prep.executeQuery();
             StringBuilder QuartoNumeros = new StringBuilder();
             while (exe.next()) {
+                String codigoQuarto = exe.getString("codigo");
+
                 String NumeroQuarto = exe.getString("Numero");
 
-                QuartoNumeros.append("nº ").append(NumeroQuarto).append("\n");
+                QuartoNumeros.append(codigoQuarto).append("- nº ").append(NumeroQuarto).append("\n");
             }
             if (QuartoNumeros.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Este hotel não possui quarto disponiveis", "Não Há Vagas", 1);
             } else {
-                while(formatarNumero.equals("")) {
-                var receberNumero = JOptionPane.showInputDialog(null, "Quartos: \n" + QuartoNumeros + "Informe o numero do quarto: ", "Selecionar Quarto", 3);
+                while(pegarCodigo.equals("")) {
+                var receberNumero = JOptionPane.showInputDialog(null, "Quartos: \n" + QuartoNumeros + "Informe o codigo  do quarto: ", "Selecionar Quarto", 3);
                 if (receberNumero == null) {
                     continuar = false;
                     break;
                 }
                
-                formatarNumero = receberNumero.trim();
+                pegarCodigo = receberNumero.trim();
                 var Format = QuartoNumeros.toString();
-                if (formatarNumero.equals("")) JOptionPane.showMessageDialog(null, "Erro: É necessario Digitar algo, Por favor tente novamente", "Valor Vazio", 0);
-                else if (!Format.contains(formatarNumero))  JOptionPane.showMessageDialog(null, "Erro: Informe um Quarto Valido", "Valor Invalido", 0);
+                if (pegarCodigo.equals("")) JOptionPane.showMessageDialog(null, "Erro: É necessario Digitar algo, Por favor tente novamente", "Valor Vazio", 0);
+                else if (!Format.contains(pegarCodigo))  JOptionPane.showMessageDialog(null, "Erro: Informe um Quarto Valido", "Valor Invalido", 0);
                 }
                 if (!continuar) break;
                 String PegarHotel = "SELECT nome FROM hotel WHERE id = ?";
@@ -104,7 +106,14 @@ public class Reserva  {
                     }
                     if (Repetido == false) break;
                 }
-                
+                String PegarQuarto = "SELECT * FROM Quarto where Codigo = ?";
+                PreparedStatement Pegar = conexao.prepareStatement(PegarQuarto);
+                Pegar.setString(1, pegarCodigo);
+                ResultSet PegarValor = Pegar.executeQuery();
+                var formatarNumero = "";
+                while (PegarValor.next()) {
+                    formatarNumero = PegarValor.getString("Numero");
+                }
                 String sql = "INSERT INTO Reserva (Codigo, hotel_nome, Quarto_Num) VALUES (?, ?, ?)";
                 PreparedStatement stmt = conexao.prepareStatement(sql);
                 stmt.setString(1, codReserva);
