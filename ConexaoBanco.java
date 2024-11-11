@@ -17,7 +17,11 @@ public class ConexaoBanco {
             conexao = DriverManager.getConnection(url, usuario, senha);
      
         }catch (SQLException e)  {
-            System.out.println("Ocorreu algum erro!!" + e.getMessage());
+            String mensagemErro = e.getMessage();
+            if (mensagemErro.contains("Access denied for user")) {
+                System.out.println("Não estar sendo possivel acessar o usuario: " + usuario + " Verifique se o usuario e senha estão corretos.");
+            } 
+            
         }
         }
         return conexao;
