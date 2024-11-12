@@ -19,7 +19,7 @@ public class ConexaoBanco {
         }catch (SQLException e)  {
             String mensagemErro = e.getMessage();
             if (mensagemErro.contains("Access denied for user")) {
-                System.out.println("Não estar sendo possivel acessar o usuario: " + usuario + " Verifique se o usuario e senha estão corretos.");
+                System.out.println("Não estar sendo possivel acessar o usuario: " + usuario + " Verifique se o usuario, senha e porta estão corretos.");
             } 
             
         }
